@@ -10,7 +10,7 @@ namespace filmes_api.Data
 
         }        
 
-        public DbSet<Filme> ?Filmes {get; set; }
+        public DbSet<Filme> Filmes {get; set; }
 
     }
 }
