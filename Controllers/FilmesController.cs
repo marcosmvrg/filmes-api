@@ -1,4 +1,6 @@
+using AutoMapper;
 using filmes_api.Data;
+using filmes_api.Data.Dto;
 using filmes_api.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,20 +9,22 @@ namespace FilmesAPI.controllers
 
     [ApiController]
     [Route("[controller]")]
-    public class FilmeController : ControllerBase
+    public class FilmesController : ControllerBase
     {
 
         private FilmeContext _context;
+        private IMapper _mapper;
 
-        public FilmeController(FilmeContext context)
+        public FilmesController(FilmeContext context, IMapper mapper)
         {
             this._context = context;
+            this._mapper = mapper;
         }
 
         [HttpPost("add")]
-        public IActionResult AdicionaFilme([FromBody] Filme bo)
+        public IActionResult AdicionaFilme([FromBody] FilmeFormDTO dto)
         {
-
+            Filme bo = _mapper.Map<Filme>(dto);
             _context.Filmes.Add(bo);
             _context.SaveChanges();
 
@@ -28,9 +32,9 @@ namespace FilmesAPI.controllers
         }
 
         [HttpGet]
-        public IEnumerable<Filme> ConsultaFilmes()
+        public IEnumerable<FilmeDTO> ConsultaFilmes()
         {
-            return _context.Filmes;
+            return _mapper.Map(_context.Filmes, new List<FilmeDTO>());
         }
 
         [HttpGet("{Id}")]
@@ -38,12 +42,15 @@ namespace FilmesAPI.controllers
         {
 
             Filme bo = _context.Filmes.SingleOrDefault(f => f.Id == Id);
-
-            return bo != null ? Ok(bo) : NotFound();
+            if (bo == null) {
+                return NotFound();
+            }
+            FilmeDTO dto = _mapper.Map<FilmeDTO>(bo);
+            return Ok(dto);
         }
 
         [HttpPatch("{Id}")]
-        public IActionResult AtualizaFilme(int Id, [FromBody] Filme filme) 
+        public IActionResult AtualizaFilme(int Id, [FromBody] FilmeFormDTO dto) 
         {
             Filme bo = _context.Filmes.SingleOrDefault(f => f.Id == Id);
 
@@ -51,10 +58,7 @@ namespace FilmesAPI.controllers
             {
                 return NotFound();
             }
-            bo.Diretor = filme.Diretor;
-            bo.Genero = filme.Genero;
-            bo.Duracao = filme.Duracao;
-            bo.Titulo = filme.Titulo;
+            _mapper.Map(dto, bo);
             _context.SaveChanges();
             return NoContent();
         }

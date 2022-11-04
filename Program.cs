@@ -12,6 +12,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<FilmeContext>(opts => opts.UseMySql(builder.Configuration.GetConnectionString("FilmeConnection"), 
 new MySqlServerVersion(new Version(5, 7, 24))));
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
