@@ -12,6 +12,8 @@ namespace filmes_api.Models
             this.Diretor = Diretor;
         }
 
+        [Key]
+        [Required]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Título é obrigatório.")]
