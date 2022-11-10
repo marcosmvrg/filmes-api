@@ -9,5 +9,9 @@ namespace filmes_api.Models
 
         public string Nome {get; set;}
 
+        public Endereco Endereco { get; set; }
+
+        public int EnderecoId { get; set; }
+
     }
 }
