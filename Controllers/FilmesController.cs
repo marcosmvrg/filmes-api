@@ -41,7 +41,7 @@ namespace FilmesAPI.controllers
         public IActionResult ConsultaPorId(int Id)
         {
 
-            Filme bo = _context.Filmes.SingleOrDefault(f => f.Id == Id);
+            Filme bo = _context.Filmes.Find(Id);
             if (bo == null) {
                 return NotFound();
             }
@@ -52,7 +52,7 @@ namespace FilmesAPI.controllers
         [HttpPatch("{Id}")]
         public IActionResult AtualizaFilme(int Id, [FromBody] FilmeFormDTO dto) 
         {
-            Filme bo = _context.Filmes.SingleOrDefault(f => f.Id == Id);
+            Filme bo = _context.Filmes.Find(Id);
 
             if (bo == null)
             {
@@ -66,7 +66,7 @@ namespace FilmesAPI.controllers
         [HttpDelete("{Id}")]
         public IActionResult DeletaFilme(int Id) 
         {
-            Filme bo = _context.Filmes.SingleOrDefault(f => f.Id == Id);
+            Filme bo = _context.Filmes.Find(Id);
 
             if (bo == null)
             {
