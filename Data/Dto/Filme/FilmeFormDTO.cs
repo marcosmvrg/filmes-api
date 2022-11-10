@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace filmes_api.Data.Dto
+namespace filmes_api.Data.Dto.Filme
 {
     public class FilmeFormDTO
     {        

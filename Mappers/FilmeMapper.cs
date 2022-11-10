@@ -1,7 +1,5 @@
-
-
 using AutoMapper;
-using filmes_api.Data.Dto;
+using filmes_api.Data.Dto.Filme;
 using filmes_api.Models;
 
 namespace filmes_api.Profiles

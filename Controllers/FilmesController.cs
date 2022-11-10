@@ -1,6 +1,6 @@
 using AutoMapper;
 using filmes_api.Data;
-using filmes_api.Data.Dto;
+using filmes_api.Data.Dto.Filme;
 using filmes_api.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,10 +12,10 @@ namespace FilmesAPI.controllers
     public class FilmesController : ControllerBase
     {
 
-        private FilmeContext _context;
+        private AppDbContext _context;
         private IMapper _mapper;
 
-        public FilmesController(FilmeContext context, IMapper mapper)
+        public FilmesController(AppDbContext context, IMapper mapper)
         {
             this._context = context;
             this._mapper = mapper;
