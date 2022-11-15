@@ -11,7 +11,7 @@ namespace filmes_api.Mappers
         {
             CreateMap<CinemaCreateDTO, Cinema>();
             CreateMap<Cinema, CinemaDTO>();
-            CreateMap<CinemaUpdateDTO, Cinema>();
+            CreateMap<CinemaUpdateDTO, Cinema>();                              
         }
 
 

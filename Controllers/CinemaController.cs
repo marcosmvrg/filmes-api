@@ -1,6 +1,8 @@
+using System.Collections;
 using AutoMapper;
 using filmes_api.Data;
 using filmes_api.Data.Dto.Cinema;
+using filmes_api.Mappers;
 using filmes_api.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,9 +32,15 @@ namespace filmes_api.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Cinema> RecuperaCinemas([FromQuery] string nomeDoFilme)
+        public IEnumerable<CinemaDTO> RecuperaCinemas([FromQuery] string nomeDoFilme)
         {
-            return _context.Cinemas;
+            List<Cinema> cinemas = _context.Cinemas.ToList();
+            List<CinemaDTO> response = new List<CinemaDTO>();
+            foreach (var item in cinemas)
+            {
+                response.Add(CinemaMapper2.toDto(item));
+            }            
+            return response;
         }
 
         [HttpGet("{id}")]

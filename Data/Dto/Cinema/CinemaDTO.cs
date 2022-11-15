@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+using filmes_api.Data.Dto.Endereco;
 
 namespace filmes_api.Data.Dto.Cinema
 {
@@ -7,6 +7,6 @@ namespace filmes_api.Data.Dto.Cinema
     {
         public int Id { get; set; }        
         public string Nome { get; set; }
-        public object Endereco { get; set; }
+        public EnderecoDTO Endereco { get; set; }
     }
 }

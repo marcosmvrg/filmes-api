@@ -11,9 +11,9 @@ namespace filmes_api.Data
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder builder) {
-            builder.Entity<Endereco>().HasOne(endereco => endereco.Cinema)
-            .WithOne(cinema => cinema.Endereco).HasForeignKey<Cinema>(cinema => cinema.EnderecoId);
+        protected override void OnModelCreating(ModelBuilder builder) {            
+            builder.Entity<Endereco>().HasOne<Cinema>(c => c.Cinema)
+            .WithOne(s => s.Endereco).HasForeignKey<Cinema>(s => s.EnderecoID);            
         }
 
         public DbSet<Filme> Filmes { get; set; }
@@ -21,6 +21,8 @@ namespace filmes_api.Data
         public DbSet<Cinema> Cinemas { get; set; }
 
         public DbSet<Endereco> Enderecos { get; set; }
+
+        public DbSet<Gerente> Gerentes { get; set; }
 
 
     }
